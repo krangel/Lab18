@@ -22,7 +22,7 @@
                 $.ajax({
                     url: "/doctor_info",
                     type: "POST",
-                    contentType: "html",
+                    contentType: "application/html",
                     processData: false,
                     data: JSON.stringify(payload),
                     complete: function (data) {

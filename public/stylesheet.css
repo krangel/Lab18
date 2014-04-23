@@ -23,5 +23,18 @@ color:Black;
 background-color:Gray;
 }
 
+footer
+{
+text-align:center;
+color:White;
+background-color:DarkBlue;
+}
+
+img
+{
+opacity:0.4;
+filter:alpha(opacity=40);
+}
+
 a:link {color:black;}      /* unvisited link */
 a:visited {color:white;}  /* visited link */

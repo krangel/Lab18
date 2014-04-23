@@ -1,7 +1,9 @@
 // Module dependencies
 
-var express    = require('express'),
-    mysql      = require('mysql');
+var express    = require('express');
+var mysql      = require('mysql'),
+    ejs        = require('ejs'),
+    connect    = require('connect');
 
 // Application initialization
 
@@ -13,6 +15,7 @@ var connection = mysql.createConnection({
 
 //var app = module.exports = express.createServer();
 var app = express();
+app.set('subtitle', 'Lab 18');
 
 // Database setup
 //connection.query('DROP DATABASE IF EXISTS krangel', function(err) {
@@ -35,37 +38,64 @@ connection.query('USE krangel', function (err) {
 });
 
 // Configuration
-app.use(express.bodyParser());
+//app.use(express.bodyParser());
+app.use(connect.urlencoded());
+app.use(connect.json());
 
 // Static content directory
 app.use(express.static('public'));
 
+app.set('view engine', 'ejs');
+
 // Main route sends our HTML file
+app.set('views', __dirname + '/views');
 
 app.get('/', function(req, res) {
-    res.sendfile(__dirname + '/index.html');
+    res.render('index');
 });
 
 app.get('/add_patient', function(req, res) {
-  res.sendfile(__dirname + '/add_patient.html');
+  res.render('add_patient');
 });
 
 app.get('/add_doctor', function(req, res) {
-  res.sendfile(__dirname + '/add_doctor.html');
+  res.render('add_doctor');
 });
 
 app.get('/patient_info', function(req, res) {
-  res.sendfile(__dirname + '/patient_info.html');
+  res.render('patient_info');
 });
 
 app.get('/doctor_info', function(req, res) {
-  res.sendfile(__dirname + '/doctor_info.html');
+  res.render('doctor_info');
 });
+app.get('/test', function(req, res){
+res.render('test');
+});
+
 /*
-app.get('/contact', function(req, res) {
-  res.sendfile(__dirname + '/contact.html');
+app.get('/lab18', function(req, res){
+res.render('lab18');
+   }
+);
+
+
+app.get('/users', function(req, res) {
+    var result = [
+	{UserID: 1, Email: 'mhaderman'},
+	{UserID: 2, Email: 'test'}
+    ];
+    res.render('displayerUserTable.ejs', {rs: result});
 });
 */
+app.get('/doctorInfo', function(req, res){
+    connection.query('select * from doctorInfo',
+		     function(err, result){
+			 res.render('doctor_info.ejs', {rs:result});
+		     }
+		    );
+})
+
 // Update MySQL database
 app.post('/patient_info', function (req, res) {
     if(typeof req.body.id != 'undefined'){
@@ -106,7 +136,7 @@ app.post('/add_patient', function (req, res) {
 });
 
 app.post('/doctor_info', function (req, res) {
-    connection.query('select * from doctorInfo where drLName = ?', req.body.drLName,
+    connection.query('select * from doctorInfo where DoctorID = ?', req.body.DoctorID,
                      function (err, result) {
 			 if(result.length > 0) {
 			     res.send('Last Name: ' + result[0].drLName + '<br />' +
@@ -182,7 +212,7 @@ app.get('/contact', function (req, res) {
 
 // get all users in a <select>
 app.post('/doctors/select', function (req, res) {
-    connection.query('select * from doctorInfo', 
+    connection.query('select * from doctorInfo ORDER BY drLName ASC, drFName ASC', 
 		     function (err, result) {
 			 var responseHTML = '<select id="doctor-list">';
 			 for (var i=0; result.length > i; i++) {
@@ -190,12 +220,11 @@ app.post('/doctors/select', function (req, res) {
 			     responseHTML += option;
 			 }
 			 responseHTML += '</select>';
-			 res.send(responseHTML);
+			 res.render('test', {rs:responseHTML});
 		     });
 });
 
 // Begin listening
-
 app.listen(8017);
 console.log("Express server listening on port %d in %s mode", app.settings.env);
 

@@ -1,0 +1,7 @@
+<% include header %>
+		      Hello, World! 
+ 		</div>  <footer> 
+ 		The footer. 
+		 </footer> 
+ 	 </body> 
+</html> 
