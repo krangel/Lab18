@@ -1,7 +1,7 @@
 <% include header %>
-    <script type="text/javascript">
-      // Populate Drop Down Menu with users from MySQL
-                $.ajax({
+<script type="text/javascript">
+   // Populate Drop Down Menu with users from MySQL
+                    $.ajax({
                     url: "doctors/select",
                     type: "POST",
                     contentType: "application/json",
@@ -31,8 +31,8 @@
                 });
             });
         });
-    </script>
-<% include menu %>
-      <h3>Retrieve Doctor's Information</h3>
-      <div id="select"></div>
+</script>
+	<% include menu %>
+   	   <h3>Select a Doctor for On Call Information</h3>
+	<div id="select"></div>
 <% include footer %>

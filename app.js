@@ -69,11 +69,10 @@ app.get('/patient_info', function(req, res) {
 app.get('/doctor_info', function(req, res) {
   res.render('doctor_info');
 });
-app.get('/test', function(req, res){
+
+/*app.get('/test', function(req, res){
 res.render('test');
 });
-
-/*
 app.get('/lab18', function(req, res){
 res.render('lab18');
    }
@@ -175,13 +174,14 @@ app.post('/patients/table', function (req, res) {
     connection.query('select * from patientInfo',
 		     function (err, result) {
 			 if(result.length > 0) {
-			     var responseHTML = '<table><tr><th>ID</th><th>First Name</th><th>Last Name</th></tr>';
+			     var responseHTML = '<table><tr><th>Name</th><th>Address</th><th>Number</th></tr>';
 			     for (var i=0; result.length > i; i++) {
 				 var id = result[i].PatientID;
 				 responseHTML += '<tr>' + 
-				     '<td><a href="/contact/?id=' + id + '">' + id +'</a></td>' + 
-				     '<td>' + result[i].pFName + '</td>' + 
-				     '<td>' + result[i].pLName + '</td>' + 
+				     '<td><a href="/contact/?id=' + id + '">' + result[i].pLName + 
+				     ', ' + result[i].pFName + '</a></td>' + 
+				     '<td>' + result[i].homeAddress + '</td>' +
+				     '<td>' + result[i].pPhoneNum + '</td>' +
 				     '</tr>';
 			     }
 			     responseHTML += '</table>';
@@ -220,7 +220,7 @@ app.post('/doctors/select', function (req, res) {
 			     responseHTML += option;
 			 }
 			 responseHTML += '</select>';
-			 res.render('test', {rs:responseHTML});
+			 res.send(responseHTML);
 		     });
 });
 
