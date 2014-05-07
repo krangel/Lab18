@@ -3,7 +3,7 @@
       $(document).ready(function () {
                     // Populate table with patients from MySQL
                      $.ajax({
-                       url: "/patients/table",
+                       url: "/meds/table",
                        type: "POST",
                        contentType: "application/json",
                        processData: false,
@@ -12,7 +12,7 @@
                        }
       });
                       $.ajax({
-                      url: "/patients/info",
+                      url: "/meds/info",
                       type: "POST",
                       contentType: "application/json",
                       processData: false,
@@ -22,9 +22,9 @@
                     }
                 });
              });
-         
+
     </script>
 <% include menu %>
-      <h3>Select a Patient to Retrieve Emergency Contact Information</h3>
+      <h3>Patient Medications</h3>
       <div id="table"></div>
 <% include footer %>

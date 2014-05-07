@@ -1,0 +1,32 @@
+<% include header %> 
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#user-submit').click(function () {
+                var payload = {
+                    pFName: $('#firstname').val(),
+                    pLName: $('#lastname').val(),
+                    medName: $('#meds').val()
+                };
+
+                console.log(payload);
+
+                $.ajax({
+                    url: "/medlist",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                        $('#output').html(data.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+<% include menu %>
+   <h3>Enter Medication and the Patient's Name</h3>
+   Patient's First Name: <input id="firstname" type="text" /><br/>
+   Patient's Last Name: <input id="lastname" type="text" /><br/>
+   Medication: <input id="meds" type="text"><br/>
+   <input id="user-submit" type="submit" />
+<% include footer%>

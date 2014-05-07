@@ -6,7 +6,9 @@
                     drFName: $('#firstname').val(),
                     drLName: $('#lastname').val(),
                     workAddress: $('#address').val(),
-                    onCallNum: $('#phone').val()
+                    onCallNum: $('#phone').val(),
+		    pLName: $('#patientL').val(),
+		    pFName: $('#patientF').val()
                 };
 
 		console.log(payload);
@@ -30,5 +32,7 @@
       Last Name: <input id="lastname" type="text" /> <br />
       Work Address: <input id="address" type="text" /> <br />
       On Call Number: <input id="phone" type="text" /> <br />
-<input id="user-submit" type="submit" />
+      Patient's Last Name: <input id="patientL" type="text" /> <br />
+      Patient's First Name: <input id="patientF" type="text" /> <br />
+      <input id="user-submit" type="submit" />
 <% include footer %>

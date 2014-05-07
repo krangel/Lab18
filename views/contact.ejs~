@@ -1,18 +1,18 @@
 <% include header %>
-    <script type="text/javascript">
+ <script type="text/javascript">
       $(document).ready(function () {
                     // Populate table with patients from MySQL
-                     $.ajax({
-                       url: "/patients/table",
+           /*          $.ajax({
+                       url: "/contact",
                        type: "POST",
                        contentType: "application/json",
                        processData: false,
                        complete: function (data) {
-                        $('div#table').html(data.responseText);
+                        $('div#contact').html(data.responseText);
                        }
-      });
+      });*/
                       $.ajax({
-                      url: "/patients/info",
+                      url: "/contact",
                       type: "POST",
                       contentType: "application/json",
                       processData: false,
@@ -22,9 +22,7 @@
                     }
                 });
              });
-         
+
     </script>
 <% include menu %>
-      <h3>Select a Patient to Retrieve Emergency Contact Information</h3>
-      <div id="table"></div>
 <% include footer %>

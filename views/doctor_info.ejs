@@ -14,19 +14,20 @@
       $(document).ready(function () {
             $('#user-submit').click(function () {
                 var payload = {
-                    drLName: $('#lastname').val()
+                    drLName: $('#lastname').val(),
+		    drFName: $('#firstname').val()
                 };
 
 		console.log(payload);
 
                 $.ajax({
-                    url: "/doctor_info",
+                    url: "/doctors/table",
                     type: "POST",
                     contentType: "html",
                     processData: false,
                     data: JSON.stringify(payload),
                     complete: function (data) {
-                        $('#output').html(data.responseText);
+                        $('div#output').html(data.responseText);
                     }
                 });
             });
@@ -35,4 +36,6 @@
 	<% include menu %>
    	   <h3>Select a Doctor for On Call Information</h3>
 	<div id="select"></div>
+	<input id="user-submit" type="submit" />
+	<div id="output"></div>
 <% include footer %>

@@ -1,0 +1,38 @@
+<% include header %>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#user-submit').click(function () {
+                var payload = {
+                    cFName: $('#firstname').val(),
+                    cLName: $('#lastname').val(),
+                    relation: $('#relation').val(),
+                    cPhoneNum: $('#phone').val(),
+                    pFName: $('#pfirstname').val(),
+                    pLName: $('#plastname').val(),
+                };
+
+                console.log(payload);
+
+                $.ajax({
+                    url: "/add_ercontact",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                        $('#output').html(data.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+<% include menu %>
+      <h3>Enter a patient's emergency contact information:</h3>
+      First Name: <input id="firstname" type="text" /> <br />
+      Last Name: <input id="lastname" type="text" /> <br />
+      Relation: <input id="relation" type="text" /> <br />
+      Phone Number: <input id="phone" type="text" /> <br />
+      Patient's First Name: <input id="pfirstname" type="text" /> <br />
+      Patient's Last Name:  <input id="plastname" type="text" /> <br />
+<input id="user-submit" type="submit" />
+<% include footer %>

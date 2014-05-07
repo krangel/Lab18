@@ -1,0 +1,13 @@
+<% include header %>
+<% include menu %>
+   <p class="about">
+	<br>
+	<br>
+   	Medical Ordering Machine or MOM as our employees like to<br> 
+	call her assist families in organizing their medical needs.<br>
+	MOM allows users to put their doctor's information and <br>
+	any medications they are taking for easy access.<br>
+	This team strives to make something diffcult <br>
+	Contact us at teamsupport@mom.com
+   </p> 
+<% include footer %>
